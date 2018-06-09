@@ -41,8 +41,8 @@
 /* Forward Declarations */ 
 
 /* header files for imported files */
-#include "oaidl.h"
-#include "ocidl.h"
+//#include "oaidl.h"
+//#include "ocidl.h"
 
 #ifdef __cplusplus
 extern "C"{
@@ -55,11 +55,22 @@ extern "C"{
 /* interface Example1 */
 /* [implicit_handle][version][uuid] */ 
 
-void Output( 
-    /* [string][in] */ const unsigned char *szOutput);
+/* interface ContextExample */
+/* [explicit_handle][version][uuid] */
 
+typedef /* [context_handle] */ void *CONTEXT_HANDLE;
 
-extern handle_t hExample1Binding;
+CONTEXT_HANDLE Open(
+	/* [in] */ handle_t hBinding,
+	/* [string][in] */ const char *szString);
+
+void Output(
+	/* [in] */ CONTEXT_HANDLE hContext);
+
+void Close(
+	/* [out][in] */ CONTEXT_HANDLE *phContext);
+
+//extern handle_t hExample1Binding;
 
 
 extern RPC_IF_HANDLE Example1_v1_0_c_ifspec;
@@ -67,6 +78,8 @@ extern RPC_IF_HANDLE Example1_v1_0_s_ifspec;
 #endif /* __Example1_INTERFACE_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */
+
+void __RPC_USER CONTEXT_HANDLE_rundown(CONTEXT_HANDLE);
 
 /* end of Additional Prototypes */
 
